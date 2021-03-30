@@ -1,0 +1,31 @@
+PODS:
+  - Nimble (9.0.0)
+  - Quick (3.1.2)
+  - RSignatureVerifier (0.1.0)
+  - SwiftLint (0.43.1)
+
+DEPENDENCIES:
+  - Nimble
+  - Quick
+  - RSignatureVerifier (from `./RSignatureVerifier.podspec`)
+  - SwiftLint
+
+SPEC REPOS:
+  trunk:
+    - Nimble
+    - Quick
+    - SwiftLint
+
+EXTERNAL SOURCES:
+  RSignatureVerifier:
+    :path: "./RSignatureVerifier.podspec"
+
+SPEC CHECKSUMS:
+  Nimble: 3b4ec3fd40f1dc178058e0981107721c615643d8
+  Quick: 60f0ea3b8e0cfc0df3259a5c06a238ad8b3c46e0
+  RSignatureVerifier: d56875d0e59379ca53412322c888ae1b2f9d17c1
+  SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
+
+PODFILE CHECKSUM: 413a789e73b93c1eb3e130d466c5571776730743
+
+COCOAPODS: 1.10.1
