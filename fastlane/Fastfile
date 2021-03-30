@@ -1,0 +1,36 @@
+# Import base_config from git
+import_from_git(url: 'https://github.com/rakutentech/ios-buildconfig.git')
+
+platform :ios do
+  desc "Build everything"
+  lane :ci do |options|
+    tests(options)
+  end
+
+  desc "Run tests"
+  lane :tests do
+    cocoapods(repo_update: ENV['REM_FL_CP_REPO_UPDATE'] || false)
+
+    lint_module
+
+    scan(
+      clean: true,
+      skip_build: true,
+      output_directory: './artifacts/unit-tests',
+      scheme: ENV['REM_FL_TESTS_SCHEME'] || 'Tests',
+      device: ENV['REM_FL_TESTS_DEVICE'] || 'REM SDK Unit Tests',
+      code_coverage: true,
+      output_types: 'json-compilation-database,html,junit',
+      output_files: 'compile_commands.json,report.html,report.junit')
+  end
+
+  lane :coverage do
+    xcov(
+      workspace: ENV['REM_FL_TESTS_WORKSPACE'],
+      scheme: ENV['REM_FL_TESTS_SCHEME'],
+      output_directory: "xcov_output",
+      include_test_targets: false,
+      json_report: true
+    )
+  end
+end
