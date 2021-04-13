@@ -11,6 +11,11 @@
 		2AB5556CF0328950DA84C0F9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 714E4C2DBCB3EB0CC1D481BB /* UIKit.framework */; };
 		36C57523641A51B91FFAFC9C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C6FBA64FE508324CB138BF9 /* Main.storyboard */; };
 		43DBD6CCF1C96D5E00CE6501 /* IntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B6970FA082CC1656433629 /* IntegrationTests.swift */; };
+		4538B9D72624F7FF009952BE /* APIClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4538B9CE2624F7FE009952BE /* APIClientTests.swift */; };
+		4538B9DB2624F7FF009952BE /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4538B9D22624F7FE009952BE /* TestHelpers.swift */; };
+		4538B9DD2624F7FF009952BE /* FetcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4538B9D42624F7FF009952BE /* FetcherTests.swift */; };
+		4538BA552625A1CE009952BE /* Sample-Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4538BA532625A1CE009952BE /* Sample-Debug.xcconfig */; };
+		4538BA562625A1CE009952BE /* Sample-Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4538BA542625A1CE009952BE /* Sample-Release.xcconfig */; };
 		48D82F61AB748BD60E65FB3F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E222724F0D7D5B1E61DAABF /* ViewController.swift */; };
 		4D44CF07D2C398525978273F /* VerifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DA52279BEDE0D57C1671D7 /* VerifierTests.swift */; };
 		52692CCD21701ED0E6555B86 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E5DF2F4E90E85A5658714F2 /* Foundation.framework */; };
@@ -54,8 +59,11 @@
 		05DA52279BEDE0D57C1671D7 /* VerifierTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = VerifierTests.swift; sourceTree = "<group>"; };
 		0E222724F0D7D5B1E61DAABF /* ViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		1F1BE5FC9420DE340DF5FCF3 /* SampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		459018AD2613DF0E00567ACA /* SampleAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleAppTests.swift; sourceTree = "<group>"; };
-		459018AF2613DF0E00567ACA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4538B9CE2624F7FE009952BE /* APIClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIClientTests.swift; sourceTree = "<group>"; };
+		4538B9D22624F7FE009952BE /* TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
+		4538B9D42624F7FF009952BE /* FetcherTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetcherTests.swift; sourceTree = "<group>"; };
+		4538BA532625A1CE009952BE /* Sample-Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Sample-Debug.xcconfig"; sourceTree = "<group>"; };
+		4538BA542625A1CE009952BE /* Sample-Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Sample-Release.xcconfig"; sourceTree = "<group>"; };
 		68B6970FA082CC1656433629 /* IntegrationTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntegrationTests.swift; sourceTree = "<group>"; };
 		6C6FBA64FE508324CB138BF9 /* Main.storyboard */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6DC251FF10A15A824E1F5518 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -134,17 +142,10 @@
 				74F30D3437EDCBB47762E3F8 /* Main.storyboard */,
 				77B35D3519D4BAF808F76B7A /* AppDelegate.swift */,
 				F2C1496DE0F1D2008127E8FA /* Info.plist */,
+				4538BA532625A1CE009952BE /* Sample-Debug.xcconfig */,
+				4538BA542625A1CE009952BE /* Sample-Release.xcconfig */,
 			);
 			path = Sample;
-			sourceTree = "<group>";
-		};
-		459018AC2613DF0E00567ACA /* SampleAppTests */ = {
-			isa = PBXGroup;
-			children = (
-				459018AD2613DF0E00567ACA /* SampleAppTests.swift */,
-				459018AF2613DF0E00567ACA /* Info.plist */,
-			);
-			path = SampleAppTests;
 			sourceTree = "<group>";
 		};
 		8044416723FD1B8F2D468509 /* Frameworks */ = {
@@ -178,6 +179,9 @@
 			isa = PBXGroup;
 			children = (
 				05DA52279BEDE0D57C1671D7 /* VerifierTests.swift */,
+				4538B9CE2624F7FE009952BE /* APIClientTests.swift */,
+				4538B9D42624F7FF009952BE /* FetcherTests.swift */,
+				4538B9D22624F7FE009952BE /* TestHelpers.swift */,
 			);
 			path = Unit;
 			sourceTree = "<group>";
@@ -185,7 +189,6 @@
 		DD64B867E225BB2A8953C4AA = {
 			isa = PBXGroup;
 			children = (
-				459018AC2613DF0E00567ACA /* SampleAppTests */,
 				9CE7C573FF515532AE34D48C /* Products */,
 				F56A1D349637517C95BC5A1F /* Tests */,
 				28FC3A3B2A592D6CD91F8B91 /* Sample */,
@@ -211,6 +214,7 @@
 			buildConfigurationList = 9E6936E00C8C6CC9490E1C77 /* Build configuration list for PBXNativeTarget "SampleApp" */;
 			buildPhases = (
 				4BA901EF8451B1761E4E1C74 /* Sources */,
+				4538B9BE2624F627009952BE /* SwiftLint */,
 				FE1471520A32E3CFA7E2CD9A /* Resources */,
 				E7D7F51874E01119AF3CDC88 /* Frameworks */,
 			);
@@ -312,11 +316,34 @@
 			files = (
 				16BDE51E155C4C081875D2B9 /* Assets.xcassets in Resources */,
 				E673AF19BF6D59683E58A870 /* LaunchScreen.storyboard in Resources */,
+				4538BA562625A1CE009952BE /* Sample-Release.xcconfig in Resources */,
+				4538BA552625A1CE009952BE /* Sample-Debug.xcconfig in Resources */,
 				36C57523641A51B91FFAFC9C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4538B9BE2624F627009952BE /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\" --config \"$SRCROOT/.swiftlint.yml\" --strict\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		07AD0704CD89D6AA2C04FD27 /* Sources */ = {
@@ -333,6 +360,9 @@
 			files = (
 				8CC621AAC377B3E80463E26C /* VerifierTests.swift in Sources */,
 				CA8457833F9C387B6697A9B6 /* IntegrationTests.swift in Sources */,
+				4538B9DD2624F7FF009952BE /* FetcherTests.swift in Sources */,
+				4538B9D72624F7FF009952BE /* APIClientTests.swift in Sources */,
+				4538B9DB2624F7FF009952BE /* TestHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -461,6 +491,7 @@
 		};
 		7880647758638F2DF6F98AC6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4538BA532625A1CE009952BE /* Sample-Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -585,6 +616,7 @@
 		};
 		D90093CFDAEBFC83890E0D50 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4538BA542625A1CE009952BE /* Sample-Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
