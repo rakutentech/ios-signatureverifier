@@ -12,8 +12,8 @@ extension URLRequest {
         // If the ETag of the requested server config matches this header
         // the server will respond with 304 Not Modified and the OS will
         // give us the cached response
-        if let etag = environment.etag {
-            addHeader("If-None-Match", etag)
+        if let eTag = environment.eTag {
+            addHeader("If-None-Match", eTag)
         }
     }
 

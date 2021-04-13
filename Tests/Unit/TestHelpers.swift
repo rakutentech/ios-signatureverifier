@@ -1,6 +1,6 @@
 @testable import RSignatureVerifier
 
-class BundleMock: EnvironmentSetupProtocol {
+class BundleMock: EnvironmentSettable {
 
     var mockAppId: String?
     var mockAppName: String?
@@ -36,39 +36,35 @@ class BundleMock: EnvironmentSetupProtocol {
     }
 
     var valueNotFound: String {
-        return mockNotFound ?? ""
+        mockNotFound ?? ""
     }
 
-    func deviceModel() -> String {
-        return mockDeviceModel ?? valueNotFound
+    var deviceModel: String {
+        mockDeviceModel ?? valueNotFound
     }
 
-    func appVersion() -> String {
-        return mockAppVersion ?? valueNotFound
+    var appVersion: String {
+        mockAppVersion ?? valueNotFound
     }
 
-    func osVersion() -> String {
-        return mockOsVersion ?? valueNotFound
+    var osVersion: String {
+        mockOsVersion ?? valueNotFound
     }
 
-    func sdkName() -> String {
-        return mockSdkName ?? valueNotFound
+    var sdkName: String {
+        mockSdkName ?? valueNotFound
     }
 
-    func sdkVersion() -> String {
-        return mockSdkVersion ?? valueNotFound
+    var sdkVersion: String {
+        mockSdkVersion ?? valueNotFound
     }
 
-    func languageCode() -> String? {
-        return mockLanguageCode ?? valueNotFound
+    var languageCode: String? {
+        mockLanguageCode ?? valueNotFound
     }
 
-    func countryCode() -> String? {
-        return mockCountryCode ?? valueNotFound
-    }
-
-    func pollingDelay() -> TimeInterval? {
-        return mockDelay
+    var countryCode: String? {
+        mockCountryCode ?? valueNotFound
     }
 }
 

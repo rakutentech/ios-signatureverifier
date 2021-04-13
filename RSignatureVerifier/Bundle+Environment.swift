@@ -1,31 +1,27 @@
-extension Bundle: EnvironmentSetupProtocol {
+extension Bundle: EnvironmentSettable {
     var valueNotFound: String {
-        return "NONE"
+        "NONE"
     }
 
-    func osVersion() -> String {
-        return UIDevice.current.systemVersion
+    var osVersion: String {
+        UIDevice.current.systemVersion
     }
 
-    func deviceModel() -> String {
+    var deviceModel: String {
         var systemInfo = utsname()
         uname(&systemInfo)
         return String(bytes: Data(bytes: &systemInfo.machine, count: Int(_SYS_NAMELEN)), encoding: .ascii)!.trimmingCharacters(in: .controlCharacters)
     }
 
-    func sdkName() -> String {
-        return "Signature Verifier"
+    var sdkName: String {
+        "Signature Verifier"
     }
 
-    func sdkVersion() -> String {
-        return Bundle(for: Environment.self).value(for: "CFBundleShortVersionString") ?? self.valueNotFound
+    var sdkVersion: String {
+        Bundle(for: Environment.self).value(for: "CFBundleShortVersionString") ?? self.valueNotFound
     }
 
-    func value(for key: String) -> String? {
-        return self.object(forInfoDictionaryKey: key) as? String
-    }
-
-    func languageCode() -> String? {
+    var languageCode: String? {
         // Use the device's preferred languages rather than Locale.current
         // because 'current' depends on the languages an app has been localized into
         guard let language = Locale.preferredLanguages.first else {
@@ -34,7 +30,11 @@ extension Bundle: EnvironmentSetupProtocol {
         return Locale(identifier: language).languageCode
     }
 
-    func countryCode() -> String? {
+    var countryCode: String? {
         return Locale.current.regionCode
+    }
+
+    func value(for key: String) -> String? {
+        return self.object(forInfoDictionaryKey: key) as? String
     }
 }

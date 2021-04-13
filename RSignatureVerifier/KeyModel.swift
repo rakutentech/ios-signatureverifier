@@ -3,10 +3,15 @@ protocol Parsable {
 }
 
 internal struct KeyModel: Decodable, Parsable {
-    // swiftlint:disable:next identifier_name
-    let id: String // use CodingKeys
+    let identifier: String
     let key: String
     let createdAt: String
+
+    private enum CodingKeys: String, CodingKey {
+        case identifier = "id"
+        case key
+        case createdAt
+    }
 
     init?(data: Data) {
         guard let dictionary = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: String],
@@ -15,7 +20,7 @@ internal struct KeyModel: Decodable, Parsable {
             let createdAt = dictionary["createdAt"] else {
             return nil
         }
-        self.id = identifier
+        self.identifier = identifier
         self.key = key
         self.createdAt = createdAt
     }

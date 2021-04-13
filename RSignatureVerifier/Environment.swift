@@ -1,17 +1,17 @@
-internal protocol EnvironmentSetupProtocol {
+internal protocol EnvironmentSettable {
     var valueNotFound: String { get }
+    var deviceModel: String { get }
+    var osVersion: String { get }
+    var sdkName: String { get }
+    var sdkVersion: String { get }
+    var languageCode: String? { get }
+    var countryCode: String? { get }
     func value(for key: String) -> String?
-    func deviceModel() -> String
-    func osVersion() -> String
-    func sdkName() -> String
-    func sdkVersion() -> String
-    func languageCode() -> String?
-    func countryCode() -> String?
 }
 
 internal class Environment {
-    let bundle: EnvironmentSetupProtocol
-    static let etagKey = "com.rakuten.tech.SignatureVerifier.payloadETag"
+    let bundle: EnvironmentSettable
+    static let eTagKey = "com.rakuten.tech.SignatureVerifier.payloadETag"
     private var baseUrl: URL? {
         guard let endpointUrlString = bundle.value(for: "RSVKeyFetchEndpoint") else {
             Logger.e("Ensure RSVKeyFetchEndpoint value in plist is valid")
@@ -20,45 +20,45 @@ internal class Environment {
         return URL(string: "\(endpointUrlString)")
     }
     var subscriptionKey: String {
-        return bundle.value(for: "RASProjectSubscriptionKey") ?? bundle.valueNotFound
+        bundle.value(for: "RASProjectSubscriptionKey") ?? bundle.valueNotFound
     }
     var appId: String {
-        return bundle.value(for: "RASApplicationIdentifier" as String) ?? bundle.valueNotFound
+        bundle.value(for: "RASApplicationIdentifier" as String) ?? bundle.valueNotFound
     }
     var appName: String {
-        return bundle.value(for: "CFBundleIdentifier" as String) ?? bundle.valueNotFound
+        bundle.value(for: "CFBundleIdentifier" as String) ?? bundle.valueNotFound
     }
     var appVersion: String {
-        return bundle.value(for: "CFBundleShortVersionString" as String) ?? bundle.valueNotFound
+        bundle.value(for: "CFBundleShortVersionString" as String) ?? bundle.valueNotFound
     }
     var deviceModel: String {
-        return bundle.deviceModel()
+        bundle.deviceModel
     }
     var osVersion: String {
-        return bundle.osVersion()
+        bundle.osVersion
     }
     var sdkName: String {
-        return bundle.sdkName()
+        bundle.sdkName
     }
     var sdkVersion: String {
-        return bundle.sdkVersion()
+        bundle.sdkVersion
     }
     var languageCode: String? {
-        return bundle.languageCode()
+        bundle.languageCode
     }
     var countryCode: String? {
-        return bundle.countryCode()
+        bundle.countryCode
     }
-    var etag: String? {
+    var eTag: String? {
         get {
-            return UserDefaults.standard.string(forKey: Environment.etagKey)
+            return UserDefaults.standard.string(forKey: Environment.eTagKey)
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: Environment.etagKey)
+            UserDefaults.standard.set(newValue, forKey: Environment.eTagKey)
         }
     }
 
-    init(bundle: EnvironmentSetupProtocol = Bundle.main) {
+    init(bundle: EnvironmentSettable = Bundle.main) {
         self.bundle = bundle
     }
 

@@ -46,7 +46,7 @@ class FetcherSpec: QuickSpec {
 
             it("will add the If-None-Match header if Etag was saved") {
                 let apiClientMock = APIClientMock()
-                UserDefaults.standard.set("my-etag", forKey: Environment.etagKey)
+                UserDefaults.standard.set("my-etag", forKey: Environment.eTagKey)
                 let fetcher = Fetcher(client: apiClientMock, environment: Environment(bundle: bundleMock))
 
                 fetcher.fetchKey(with: "key", completionHandler: { (_) in
@@ -57,7 +57,7 @@ class FetcherSpec: QuickSpec {
 
             it("will not add the If-None-Match header if Etag cannot be found") {
                 let apiClientMock = APIClientMock()
-                UserDefaults.standard.set(nil, forKey: Environment.etagKey)
+                UserDefaults.standard.set(nil, forKey: Environment.eTagKey)
                 let fetcher = Fetcher(client: apiClientMock, environment: Environment(bundle: bundleMock))
 
                 fetcher.fetchKey(with: "key", completionHandler: { (_) in

@@ -1,4 +1,4 @@
-protocol SessionProtocol {
+internal protocol SessionProtocol {
     func startTask(with request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void)
 }
 
