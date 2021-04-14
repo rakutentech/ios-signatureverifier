@@ -13,11 +13,12 @@ internal class Environment {
     let bundle: EnvironmentSettable
     static let eTagKey = "com.rakuten.tech.SignatureVerifier.payloadETag"
     private var baseUrl: URL? {
-        guard let endpointUrlString = bundle.value(for: "RSVKeyFetchEndpoint") else {
+        guard let endpointUrlString = bundle.value(for: "RSVKeyFetchEndpoint"),
+              let url = URL(string: endpointUrlString) else {
             Logger.e("Ensure RSVKeyFetchEndpoint value in plist is valid")
             return nil
         }
-        return URL(string: "\(endpointUrlString)")
+        return url
     }
     var subscriptionKey: String {
         bundle.value(for: "RASProjectSubscriptionKey") ?? bundle.valueNotFound
