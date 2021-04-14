@@ -14,7 +14,7 @@ class FetcherSpec: QuickSpec {
 
             it("will call the send function of the api client passing in a request") {
                 let apiClientMock = APIClientMock()
-                let fetcher = Fetcher(client: apiClientMock, environment: Environment())
+                let fetcher = Fetcher(client: apiClientMock, environment: Environment(bundle: bundleMock))
 
                 fetcher.fetchKey(with: "key", completionHandler: { (_) in
                 })
@@ -151,7 +151,7 @@ class FetcherSpec: QuickSpec {
                         {"id":"foo","key":"myKeyId","createdAt":"boo"}
                         """
                     apiClientMock.data = dataString.data(using: .utf8)
-                    let fetcher = Fetcher(client: apiClientMock, environment: Environment())
+                    let fetcher = Fetcher(client: apiClientMock, environment: Environment(bundle: bundleMock))
 
                     fetcher.fetchKey(with: "key", completionHandler: { (result) in
                         testResult = result
@@ -166,7 +166,7 @@ class FetcherSpec: QuickSpec {
                     var testResult: Any?
                     let apiClientMock = APIClientMock()
                     apiClientMock.error = NSError(domain: "Test", code: 123, userInfo: nil)
-                    let fetcher = Fetcher(client: apiClientMock, environment: Environment())
+                    let fetcher = Fetcher(client: apiClientMock, environment: Environment(bundle: bundleMock))
 
                     fetcher.fetchKey(with: "key", completionHandler: { (result) in
                         testResult = result
