@@ -1,13 +1,7 @@
-internal protocol SessionProtocol {
-    func startTask(with request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void)
-}
-
-extension URLSession: SessionProtocol {
-    func startTask(with request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) {
-        dataTask(with: request) { (data, response, error) in
-            completionHandler(data, response, error)
-        }.resume()
-    }
+protocol APIClientType {
+    func send<T>(request: URLRequest,
+                 parser: T.Type,
+                 completionHandler: @escaping (Result<Response, Error>) -> Void) where T: Parsable
 }
 
 internal struct Response {
@@ -20,14 +14,16 @@ internal struct Response {
     }
 }
 
-internal class APIClient {
-    let session: SessionProtocol
+internal final class APIClient {
+    let session: SessionType
 
-    init(session: SessionProtocol = URLSession(configuration: URLSessionConfiguration.default)) {
+    init(session: SessionType = URLSession(configuration: URLSessionConfiguration.default)) {
         self.session = session
     }
 
-    func send<T>(request: URLRequest, parser: T.Type, completionHandler: @escaping (Result<Response, Error>) -> Void) where T: Parsable {
+    func send<T>(request: URLRequest,
+                 parser: T.Type,
+                 completionHandler: @escaping (Result<Response, Error>) -> Void) where T: Parsable {
 
         session.startTask(with: request) { (data, response, error) in
 
@@ -52,14 +48,14 @@ internal class APIClient {
                 let serverError = NSError.serverError(
                     code: (response as? HTTPURLResponse)?.statusCode ?? 0,
                     message: "Unspecified server error occurred")
-                Logger.e("Error: \(String(describing: serverError))")
+                Logger.e("Error: \(serverError.description)")
                 return completionHandler(.failure(serverError))
             }
         }
     }
 }
 
-struct APIError: Decodable, Equatable {
+private struct APIError: Decodable, Equatable {
     let code: Int
     let message: String
 }

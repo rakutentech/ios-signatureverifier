@@ -31,10 +31,10 @@ extension Bundle: EnvironmentSettable {
     }
 
     var countryCode: String? {
-        return Locale.current.regionCode
+        Locale.current.regionCode
     }
 
     func value(for key: String) -> String? {
-        return self.object(forInfoDictionaryKey: key) as? String
+        object(forInfoDictionaryKey: key) as? String
     }
 }

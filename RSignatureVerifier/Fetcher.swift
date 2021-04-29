@@ -1,8 +1,12 @@
-internal class Fetcher {
-    let apiClient: APIClient
+protocol Fetchable {
+    func fetchKey(with keyId: String, completionHandler: @escaping (KeyModel?) -> Void)
+}
+
+internal struct Fetcher: Fetchable {
+    let apiClient: APIClientType
     let environment: Environment
 
-    init(client: APIClient, environment: Environment) {
+    init(client: APIClientType, environment: Environment) {
         self.apiClient = client
         self.environment = environment
     }

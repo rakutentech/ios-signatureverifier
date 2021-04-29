@@ -15,7 +15,7 @@ class APIClientSpec: QuickSpec {
     }
     override func spec() {
         describe("send function") {
-            class SessionMock: SessionProtocol {
+            class SessionMock: SessionType {
                 var jsonObj: [String: Any]?
                 var serverErrorCode: Int?
                 var error: NSError?

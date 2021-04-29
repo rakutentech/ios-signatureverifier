@@ -10,16 +10,11 @@ internal protocol EnvironmentSettable {
 }
 
 internal class Environment {
-    let bundle: EnvironmentSettable
     static let eTagKey = "com.rakuten.tech.SignatureVerifier.payloadETag"
-    private var baseUrl: URL? {
-        guard let endpointUrlString = bundle.value(for: "RSVKeyFetchEndpoint"),
-              let url = URL(string: endpointUrlString) else {
-            Logger.e("Ensure RSVKeyFetchEndpoint value in plist is valid")
-            return nil
-        }
-        return url
-    }
+
+    let bundle: EnvironmentSettable
+    var userDefaults = UserDefaults.standard
+
     var subscriptionKey: String {
         bundle.value(for: "RASProjectSubscriptionKey") ?? bundle.valueNotFound
     }
@@ -52,11 +47,19 @@ internal class Environment {
     }
     var eTag: String? {
         get {
-            return UserDefaults.standard.string(forKey: Environment.eTagKey)
+            return userDefaults.string(forKey: Environment.eTagKey)
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: Environment.eTagKey)
+            userDefaults.set(newValue, forKey: Environment.eTagKey)
         }
+    }
+    private var baseUrl: URL? {
+        guard let endpointUrlString = bundle.value(for: "RSVKeyFetchEndpoint"),
+              let url = URL(string: endpointUrlString) else {
+            Logger.e("Ensure RSVKeyFetchEndpoint value in plist is valid")
+            return nil
+        }
+        return url
     }
 
     init(bundle: EnvironmentSettable = Bundle.main) {

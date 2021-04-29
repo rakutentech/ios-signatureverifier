@@ -68,32 +68,35 @@ class BundleMock: EnvironmentSettable {
     }
 }
 
-class FetcherMock: Fetcher {
+class FetcherMock: Fetchable {
     var fetchConfigCalledNumTimes = 0
     var fetchKeyCalledNumTimes = 0
-    var fetchedKey = KeyModel(data: (try? JSONSerialization.data(withJSONObject: ["id": "", "key": "", "createdAt": ""], options: []))!)
+    var fetchedKey = KeyModel(data: (try? JSONSerialization.data(
+                                        withJSONObject: ["id": "", "key": "", "createdAt": ""], options: []))!)
 
-    override func fetchKey(with keyId: String, completionHandler: @escaping (KeyModel?) -> Void) {
+    func fetchKey(with keyId: String, completionHandler: @escaping (KeyModel?) -> Void) {
         fetchKeyCalledNumTimes += 1
         completionHandler(fetchedKey)
     }
 }
 
-class VerifierMock: Verifier {
+class VerifierMock: Verifiable {
     var verifyOK = true
 
-    override func verify(signatureBase64: String, objectData: Data, keyBase64: String) -> Bool {
+    func verify(signatureBase64: String, objectData: Data, keyBase64: String) -> Bool {
         return verifyOK
     }
 }
 
-class APIClientMock: APIClient {
+class APIClientMock: APIClientType {
     var data: Data?
     var headers: [String: String]?
     var error: Error?
     var request: URLRequest?
 
-    override func send<T>(request: URLRequest, parser: T.Type, completionHandler: @escaping (Result<Response, Error>) -> Void) where T: Parsable {
+    func send<T>(request: URLRequest,
+                 parser: T.Type,
+                 completionHandler: @escaping (Result<Response, Error>) -> Void) where T: Parsable {
         self.request = request
 
         guard let data = data, let url = request.url else {

@@ -1,7 +1,13 @@
-internal class Verifier {
+protocol Verifiable {
+    func verify(signatureBase64: String, objectData: Data, keyBase64: String) -> Bool
+}
+
+internal struct Verifier: Verifiable {
+
     func verify(signatureBase64: String,
                 objectData: Data,
                 keyBase64: String) -> Bool {
+
         Logger.v("Verify data for \(String(data: objectData, encoding: .utf8) ?? "<nil>") with signature \(signatureBase64) and key \(keyBase64)")
         guard let secKey = createSecKey(for: keyBase64),
             let signatureData = Data(base64Encoded: signatureBase64) else {
@@ -21,7 +27,7 @@ internal class Verifier {
         return verified
     }
 
-    fileprivate func createSecKey(for base64String: String) -> SecKey? {
+    private func createSecKey(for base64String: String) -> SecKey? {
         let attributes: [String: Any] = [
             kSecAttrKeyClass as String: kSecAttrKeyClassPublic,
             kSecAttrKeyType as String: kSecAttrKeyTypeECSECPrimeRandom,
