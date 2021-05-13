@@ -14,7 +14,7 @@ internal struct Response {
     }
 }
 
-internal final class APIClient {
+internal final class APIClient: APIClientType {
     let session: SessionType
 
     init(session: SessionType = URLSession(configuration: URLSessionConfiguration.default)) {
