@@ -1,20 +1,20 @@
 protocol APIClientType {
     func send<T>(request: URLRequest,
-                 parser: T.Type,
-                 completionHandler: @escaping (Result<Response, Error>) -> Void) where T: Parsable
+                 responseType: T.Type,
+                 completionHandler: @escaping (Result<Response, Error>) -> Void) where T: Decodable
 }
 
 internal struct Response {
-    let object: Parsable
+    let object: Decodable
     let httpResponse: HTTPURLResponse
 
-    init(_ object: Parsable, _ response: HTTPURLResponse) {
+    init(_ object: Decodable, _ response: HTTPURLResponse) {
         self.object = object
         self.httpResponse = response
     }
 }
 
-internal final class APIClient {
+internal final class APIClient: APIClientType {
     let session: SessionType
 
     init(session: SessionType = URLSession(configuration: URLSessionConfiguration.default)) {
@@ -22,14 +22,14 @@ internal final class APIClient {
     }
 
     func send<T>(request: URLRequest,
-                 parser: T.Type,
-                 completionHandler: @escaping (Result<Response, Error>) -> Void) where T: Parsable {
+                 responseType: T.Type,
+                 completionHandler: @escaping (Result<Response, Error>) -> Void) where T: Decodable {
 
         session.startTask(with: request) { (data, response, error) in
 
             if let httpResponse = response as? HTTPURLResponse,
                 let payloadData = data,
-                let object = parser.init(data: payloadData) {
+                let object = try? JSONDecoder().decode(responseType.self, from: payloadData) {
                 return completionHandler(.success(Response(object, httpResponse)))
             }
 

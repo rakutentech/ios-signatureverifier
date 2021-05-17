@@ -3,16 +3,10 @@ import Nimble
 @testable import RSignatureVerifier
 
 class APIClientSpec: QuickSpec {
-    struct TestStruct: Parsable, Equatable {
-        let foo: [String: String]
-
-        init?(data: Data) {
-            guard let foo = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: String] else {
-                return nil
-            }
-            self.foo = foo
-        }
+    struct TestStruct: Decodable, Equatable {
+        let foo: String
     }
+
     override func spec() {
         describe("send function") {
             class SessionMock: SessionType {
@@ -40,10 +34,9 @@ class APIClientSpec: QuickSpec {
 
                 it("will pass a result to completion handler with expected value") {
                     let sessionMock = SessionMock(json: ["foo": "bar"])
-                    let jsonData = (try? JSONSerialization.data(withJSONObject: ["foo": "bar"], options: []))!
                     APIClient(session: sessionMock).send(
                         request: URLRequest(url: URL(string: "https://test.com")!),
-                        parser: TestStruct.self,
+                        responseType: TestStruct.self,
                         completionHandler: {(result) in
                             switch result {
                             case .success(let response):
@@ -53,7 +46,7 @@ class APIClientSpec: QuickSpec {
                             }
                         })
 
-                    expect(testResult).toEventually(equal(TestStruct(data: jsonData)), timeout: .seconds(2))
+                    expect(testResult).toEventually(equal(TestStruct(foo: "bar")), timeout: .seconds(2))
                 }
             }
             context("when network response contains valid error json") {
@@ -63,7 +56,7 @@ class APIClientSpec: QuickSpec {
                     let sessionMock = SessionMock(json: ["code": 1, "message": "error message"])
                     APIClient(session: sessionMock).send(
                         request: URLRequest(url: URL(string: "https://test.com")!),
-                        parser: TestStruct.self,
+                        responseType: TestStruct.self,
                         completionHandler: { (result) in
                             switch result {
                             case .success:
@@ -80,7 +73,7 @@ class APIClientSpec: QuickSpec {
                     let sessionMock = SessionMock(json: ["code": 1, "message": "error message"])
                     APIClient(session: sessionMock).send(
                         request: URLRequest(url: URL(string: "https://test.com")!),
-                        parser: TestStruct.self,
+                        responseType: TestStruct.self,
                         completionHandler: { (result) in
                             switch result {
                             case .success:
@@ -99,7 +92,7 @@ class APIClientSpec: QuickSpec {
                     let sessionMock = SessionMock(json: ["foo": "bar"])
                     APIClient(session: sessionMock).send(
                         request: URLRequest(url: URL(string: "https://test.com")!),
-                        parser: TestStruct.self,
+                        responseType: TestStruct.self,
                         completionHandler: { (result) in
                             switch result {
                             case .success:
@@ -119,7 +112,7 @@ class APIClientSpec: QuickSpec {
                     let sessionMock = SessionMock(json: nil, statusCode: 400)
                     APIClient(session: sessionMock).send(
                         request: URLRequest(url: URL(string: "https://test.com")!),
-                        parser: TestStruct.self,
+                        responseType: TestStruct.self,
                         completionHandler: { (result) in
                             switch result {
                             case .success:
@@ -136,7 +129,7 @@ class APIClientSpec: QuickSpec {
                     let sessionMock = SessionMock(json: nil, error: NSError(domain: "Test", code: 123, userInfo: nil))
                     APIClient(session: sessionMock).send(
                         request: URLRequest(url: URL(string: "https://test.com")!),
-                        parser: TestStruct.self,
+                        responseType: TestStruct.self,
                         completionHandler: { (result) in
                             switch result {
                             case .success:

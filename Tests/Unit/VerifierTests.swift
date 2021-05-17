@@ -1,6 +1,5 @@
 import Quick
 import Nimble
-import XCTest
 @testable import RSignatureVerifier
 
 // Both Android and iOS SDKs receive and verify against the same crypto algos so we can

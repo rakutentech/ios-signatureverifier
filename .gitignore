@@ -19,10 +19,17 @@ Pods
 /artifacts
 /fastlane/report.xml
 /fastlane/README.md
-/fastlane/.env
+/fastlane/test_output
 
 # Jazzy-generated documentation
 docs/
+
+# Build
+build/
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
 
 # Gems
 .bundle/

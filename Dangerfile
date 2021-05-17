@@ -3,7 +3,7 @@ warn("Big PR") if git.lines_of_code > 500
 
 xcov.report(
   workspace: 'RSignatureVerifier.xcworkspace',
-  scheme: 'Tests',
+  scheme: 'UnitTests',
   output_directory: 'artifacts/unit-tests/coverage',
   source_directory: 'RSignatureVerifier',
   json_report: true,
