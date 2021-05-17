@@ -2,21 +2,15 @@
 internal final class RealSignatureVerifier {
     static let shared = RealSignatureVerifier()
 
-    private let environment: Environment
-    private let apiClient: APIClientType
-    private var fetcher: Fetcher
+    private var fetcher: Fetchable
     private let keyStore: KeyStore
-    private let verifier: Verifier
+    private let verifier: Verifiable
 
-    init(environment: Environment = Environment(),
-         apiClient: APIClientType = APIClient(),
-         fetcher: Fetcher? = nil,
+    init(fetcher: Fetchable = Fetcher(client: APIClient(), environment: Environment()),
          keyStore: KeyStore = KeyStore(),
-         verifier: Verifier = Verifier()) {
+         verifier: Verifiable = Verifier()) {
 
-        self.environment = environment
-        self.apiClient = apiClient
-        self.fetcher = fetcher ?? Fetcher(client: apiClient, environment: environment)
+        self.fetcher = fetcher
         self.keyStore = keyStore
         self.verifier = verifier
     }

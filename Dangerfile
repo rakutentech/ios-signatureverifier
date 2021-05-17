@@ -9,5 +9,5 @@ xcov.report(
   json_report: true,
   include_targets: 'RSignatureVerifier.framework',
   include_test_targets: false,
-  minimum_coverage_percentage: 60.0
+  minimum_coverage_percentage: 70.0
 )

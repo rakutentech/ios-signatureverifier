@@ -18,7 +18,7 @@ internal struct Fetcher: Fetchable {
         }
         let keyRequest = request(for: url)
 
-        apiClient.send(request: keyRequest, parser: KeyModel.self) { (result) in
+        apiClient.send(request: keyRequest, responseType: KeyModel.self) { (result) in
             switch result {
             case .success(let response):
                 completionHandler(response.object as? KeyModel)

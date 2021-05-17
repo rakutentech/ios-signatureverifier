@@ -17,6 +17,7 @@
 		45B63B4F264C786E00ED8BA0 /* FetcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4538B9D42624F7FF009952BE /* FetcherTests.swift */; };
 		45B63B58264C787300ED8BA0 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4538B9D22624F7FE009952BE /* TestHelpers.swift */; };
 		45CBD69E264C7A3F006F4918 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4538B9D22624F7FE009952BE /* TestHelpers.swift */; };
+		45CBD77326526652006F4918 /* RealSignatureVerifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CBD77226526652006F4918 /* RealSignatureVerifierTests.swift */; };
 		48D82F61AB748BD60E65FB3F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E222724F0D7D5B1E61DAABF /* ViewController.swift */; };
 		4D44CF07D2C398525978273F /* VerifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DA52279BEDE0D57C1671D7 /* VerifierTests.swift */; };
 		9DDD0ABA29E28EA982C311F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B35D3519D4BAF808F76B7A /* AppDelegate.swift */; };
@@ -57,6 +58,7 @@
 		4538BA532625A1CE009952BE /* Sample-Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Sample-Debug.xcconfig"; sourceTree = "<group>"; };
 		4538BA542625A1CE009952BE /* Sample-Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Sample-Release.xcconfig"; sourceTree = "<group>"; };
 		45B63B38264C786300ED8BA0 /* KeyStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyStoreTests.swift; sourceTree = "<group>"; };
+		45CBD77226526652006F4918 /* RealSignatureVerifierTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealSignatureVerifierTests.swift; sourceTree = "<group>"; };
 		68B6970FA082CC1656433629 /* IntegrationTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntegrationTests.swift; sourceTree = "<group>"; };
 		6C6FBA64FE508324CB138BF9 /* Main.storyboard */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6DC251FF10A15A824E1F5518 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				4538B9D42624F7FF009952BE /* FetcherTests.swift */,
 				45B63B38264C786300ED8BA0 /* KeyStoreTests.swift */,
 				4538B9D22624F7FE009952BE /* TestHelpers.swift */,
+				45CBD77226526652006F4918 /* RealSignatureVerifierTests.swift */,
 			);
 			path = Unit;
 			sourceTree = "<group>";
@@ -319,6 +322,7 @@
 				45B63B46264C786A00ED8BA0 /* APIClientTests.swift in Sources */,
 				45B63B58264C787300ED8BA0 /* TestHelpers.swift in Sources */,
 				45B63B4F264C786E00ED8BA0 /* FetcherTests.swift in Sources */,
+				45CBD77326526652006F4918 /* RealSignatureVerifierTests.swift in Sources */,
 				4D44CF07D2C398525978273F /* VerifierTests.swift in Sources */,
 				45B63B39264C786300ED8BA0 /* KeyStoreTests.swift in Sources */,
 			);
