@@ -2,69 +2,22 @@
 
 class BundleMock: EnvironmentSettable {
 
-    var mockAppId: String?
-    var mockAppName: String?
-    var mockAppVersion: String?
-    var mockEndpoint: String?
     var mockSubKey: String?
-    var mockDeviceModel: String?
-    var mockOsVersion: String?
-    var mockSdkName: String?
-    var mockSdkVersion: String?
-    var mockLanguageCode: String?
-    var mockCountryCode: String?
-    var mockNotFound: String?
-    var mockDelay: TimeInterval?
+    var mockEndpoint: String?
 
     func value(for key: String) -> String? {
         switch key {
-        case "RASApplicationIdentifier":
-            return mockAppId
         case "RSVKeyFetchEndpoint":
             return mockEndpoint
         case "RASProjectSubscriptionKey":
             return mockSubKey
-        case "CFBundleIdentifier":
-            return mockAppName
-        case "CFBundleDisplayName":
-            return mockAppName
-        case "CFBundleShortVersionString":
-            return mockAppVersion
         default:
             return nil
         }
     }
 
     var valueNotFound: String {
-        mockNotFound ?? ""
-    }
-
-    var deviceModel: String {
-        mockDeviceModel ?? valueNotFound
-    }
-
-    var appVersion: String {
-        mockAppVersion ?? valueNotFound
-    }
-
-    var osVersion: String {
-        mockOsVersion ?? valueNotFound
-    }
-
-    var sdkName: String {
-        mockSdkName ?? valueNotFound
-    }
-
-    var sdkVersion: String {
-        mockSdkVersion ?? valueNotFound
-    }
-
-    var languageCode: String? {
-        mockLanguageCode ?? valueNotFound
-    }
-
-    var countryCode: String? {
-        mockCountryCode ?? valueNotFound
+        Bundle.main.valueNotFound
     }
 }
 

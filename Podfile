@@ -1,7 +1,7 @@
 platform :ios, '11.0'
 use_frameworks!
 
-secrets = ["RSV_KEY_FETCH_ENDPOINT", "RAS_APPLICATION_IDENTIFIER", "RAS_SUBSCRIPTION_KEY"]
+secrets = ["RSV_KEY_FETCH_ENDPOINT", "RAS_SUBSCRIPTION_KEY"]
 
 target 'SampleApp' do
   pod 'RSignatureVerifier', :path => './RSignatureVerifier.podspec'

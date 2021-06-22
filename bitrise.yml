@@ -57,6 +57,54 @@ workflows:
             git config --global url."https://x-token-auth:$PUBLISHER_GITHUB_API_TOKEN@github.com".InsteadOf https://github.com
             git subtree push --prefix docs origin gh-pages
             git config --global --unset url."https://github.com".insteadOf
+
+  integration_tests:
+    before_run:
+    - _setup
+    steps:
+    - script@1:
+        title: Setup environment
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+
+            brew install ruby@3
+            brew link --force ruby@3
+            bundle exec fastlane update_xcconfig path:"Sample/Sample-IntegrationTests.xcconfig" \
+            TESTS_BUNDLE_VERSION:"$TESTS_BUNDLE_VERSION" \
+            TESTS_BUNDLE_URL:"$TESTS_BUNDLE_URL" \
+            TESTS_BUNDLE_SIGNATURE:"$TESTS_BUNDLE_SIGNATURE" \
+            TESTS_KEY_ID:"$TESTS_KEY_ID"
+    - xcode-test@2:
+        inputs:
+        - simulator_device: iPhone 8
+        - scheme: IntegrationTests
+        - should_build_before_test: 'no'
+    - slack@3:
+        inputs:
+        - channel: ''
+        - webhook_url: "$SLACK_CHANNEL_WEBHOOK"
+        - text: ''
+        - title: ''
+        - author_name: ''
+        - channel_on_error: ''
+        - pretext: ''
+        - pretext_on_error: ''
+        - message_on_error: |+
+            $BITRISE_APP_TITLE » $BITRISE_TRIGGERED_WORKFLOW_TITLE - #$BITRISE_BUILD_NUMBER *Failure*
+            <$BITRISE_BUILD_URL|Open>
+        - message: |+
+            $BITRISE_APP_TITLE » $BITRISE_TRIGGERED_WORKFLOW_TITLE - #$BITRISE_BUILD_NUMBER *Success*
+            <$BITRISE_BUILD_URL|Open>
+        - fields: ''
+        - buttons: ''
+        - footer: ''
+        - footer_icon: ''
+        - timestamp: 'no'
+        - icon_url_on_error: ''
+        - from_username_on_error: ''
+        - color_on_error: "#d10b20"
         
   _setup:
     steps:
