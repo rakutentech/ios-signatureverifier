@@ -69,8 +69,6 @@ workflows:
             #!/usr/bin/env bash
             set -ex
 
-            brew install ruby@3
-            brew link --force ruby@3
             bundle exec fastlane update_xcconfig path:"Sample/Sample-IntegrationTests.xcconfig" \
             TESTS_BUNDLE_VERSION:"$TESTS_BUNDLE_VERSION" \
             TESTS_BUNDLE_URL:"$TESTS_BUNDLE_URL" \
@@ -112,6 +110,14 @@ workflows:
         inputs:
         - update_submodules: 'no'
     - cache-pull@2: {}
+    - script@1:
+        title: Install local version of Ruby
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -e
+            
+            rbenv install
     - script@1:
         title: Bundle install
         inputs:
