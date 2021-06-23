@@ -117,7 +117,7 @@ workflows:
             #!/usr/bin/env bash
             set -e
             
-            rbenv install
+            rbenv install --skip-existing
     - script@1:
         title: Bundle install
         inputs:
