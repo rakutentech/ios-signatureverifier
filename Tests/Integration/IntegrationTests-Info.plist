@@ -20,5 +20,13 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>TESTS_BUNDLE_SIGNATURE</key>
+	<string>$(TESTS_BUNDLE_SIGNATURE)</string>
+	<key>TESTS_BUNDLE_URL</key>
+	<string>$(TESTS_BUNDLE_URL)</string>
+	<key>TESTS_BUNDLE_VERSION</key>
+	<string>$(TESTS_BUNDLE_VERSION)</string>
+	<key>TESTS_KEY_ID</key>
+	<string>$(TESTS_KEY_ID)</string>
 </dict>
 </plist>

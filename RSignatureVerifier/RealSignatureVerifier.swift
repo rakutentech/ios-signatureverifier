@@ -2,8 +2,8 @@
 internal final class RealSignatureVerifier {
     static let shared = RealSignatureVerifier()
 
+    let keyStore: KeyStore
     private var fetcher: Fetchable
-    private let keyStore: KeyStore
     private let verifier: Verifiable
 
     init(fetcher: Fetchable = Fetcher(client: APIClient(), environment: Environment()),

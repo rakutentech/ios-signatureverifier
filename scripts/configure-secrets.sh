@@ -15,7 +15,7 @@ usage: $0 param1 param[n]...
    - param[n]: a list of secrets environment variables to put in secret config file
 
   Example usage:
-    $0 SignatureVerifier RSV_KEY_FETCH_ENDPOINT RAS_APPLICATION_IDENTIFIER RAS_SUBSCRIPTION_KEY
+    $0 SignatureVerifier RSV_KEY_FETCH_ENDPOINT RAS_SUBSCRIPTION_KEY
 HELP_USAGE
 }
 

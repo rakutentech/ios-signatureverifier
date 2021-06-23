@@ -5,19 +5,17 @@ import Nimble
 class RealSignatureVerifierSpec: QuickSpec {
     override func spec() {
 
-        context("RealSignatureVerifier") {
+        describe("RealSignatureVerifier") {
 
             let bundleMock = BundleMock()
             let keyStore = KeyStore(service: "unit-tests")
+            let mockData = "data".data(using: .utf8)!
 
             var fetcher: FetcherMock!
             var verifier: VerifierMock!
             var svModule: RealSignatureVerifier!
 
-            // Fetcher won't work if endpoint or appid are invalid
-            // so need to set something valid
             bundleMock.mockEndpoint = "https://www.endpoint.com"
-            bundleMock.mockAppId = "foo-id"
 
             beforeEach {
                 keyStore.empty()
@@ -31,7 +29,6 @@ class RealSignatureVerifierSpec: QuickSpec {
             }
 
             context("when calling verify method") {
-                let mockData = "data".data(using: .utf8)!
 
                 context("and key exists in the cache") {
                     let keyId = "cachedKeyId"

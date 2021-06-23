@@ -10,8 +10,6 @@
 		16BDE51E155C4C081875D2B9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2C466FA723CDC50DE50EC48 /* Assets.xcassets */; };
 		36C57523641A51B91FFAFC9C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C6FBA64FE508324CB138BF9 /* Main.storyboard */; };
 		43DBD6CCF1C96D5E00CE6501 /* IntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B6970FA082CC1656433629 /* IntegrationTests.swift */; };
-		4538BA552625A1CE009952BE /* Sample-Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4538BA532625A1CE009952BE /* Sample-Debug.xcconfig */; };
-		4538BA562625A1CE009952BE /* Sample-Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4538BA542625A1CE009952BE /* Sample-Release.xcconfig */; };
 		45B63B39264C786300ED8BA0 /* KeyStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B63B38264C786300ED8BA0 /* KeyStoreTests.swift */; };
 		45B63B46264C786A00ED8BA0 /* APIClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4538B9CE2624F7FE009952BE /* APIClientTests.swift */; };
 		45B63B4F264C786E00ED8BA0 /* FetcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4538B9D42624F7FF009952BE /* FetcherTests.swift */; };
@@ -55,8 +53,9 @@
 		4538B9CE2624F7FE009952BE /* APIClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIClientTests.swift; sourceTree = "<group>"; };
 		4538B9D22624F7FE009952BE /* TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		4538B9D42624F7FF009952BE /* FetcherTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetcherTests.swift; sourceTree = "<group>"; };
-		4538BA532625A1CE009952BE /* Sample-Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Sample-Debug.xcconfig"; sourceTree = "<group>"; };
+		4538BA532625A1CE009952BE /* Sample-Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "Sample-Debug.xcconfig"; path = "Sample/Sample-Debug.xcconfig"; sourceTree = SOURCE_ROOT; };
 		4538BA542625A1CE009952BE /* Sample-Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Sample-Release.xcconfig"; sourceTree = "<group>"; };
+		45603B3926812118008AD21B /* Sample-IntegrationTests.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Sample-IntegrationTests.xcconfig"; sourceTree = "<group>"; };
 		45B63B38264C786300ED8BA0 /* KeyStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyStoreTests.swift; sourceTree = "<group>"; };
 		45CBD77226526652006F4918 /* RealSignatureVerifierTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealSignatureVerifierTests.swift; sourceTree = "<group>"; };
 		68B6970FA082CC1656433629 /* IntegrationTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntegrationTests.swift; sourceTree = "<group>"; };
@@ -120,6 +119,7 @@
 				F2C1496DE0F1D2008127E8FA /* Info.plist */,
 				4538BA532625A1CE009952BE /* Sample-Debug.xcconfig */,
 				4538BA542625A1CE009952BE /* Sample-Release.xcconfig */,
+				45603B3926812118008AD21B /* Sample-IntegrationTests.xcconfig */,
 			);
 			path = Sample;
 			sourceTree = "<group>";
@@ -254,7 +254,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1240;
-				LastUpgradeCheck = 1100;
+				LastUpgradeCheck = 1250;
 				ORGANIZATIONNAME = "Rakuten Group, Inc.";
 			};
 			buildConfigurationList = 606601AEB07CDCFDECD09DDB /* Build configuration list for PBXProject "RSignatureVerifier" */;
@@ -285,8 +285,6 @@
 			files = (
 				16BDE51E155C4C081875D2B9 /* Assets.xcassets in Resources */,
 				E673AF19BF6D59683E58A870 /* LaunchScreen.storyboard in Resources */,
-				4538BA562625A1CE009952BE /* Sample-Release.xcconfig in Resources */,
-				4538BA552625A1CE009952BE /* Sample-Debug.xcconfig in Resources */,
 				36C57523641A51B91FFAFC9C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -616,6 +614,7 @@
 		};
 		F2BE92C696E122CFD8595557 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 45603B3926812118008AD21B /* Sample-IntegrationTests.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = "Tests/Integration/IntegrationTests-Info.plist";

@@ -1,3 +1,5 @@
+require 'xcodeproj'
+
 # Import base_config from git
 import_from_git(url: 'https://github.com/rakutentech/ios-buildconfig.git')
 
@@ -32,5 +34,13 @@ platform :ios do
       include_test_targets: false,
       json_report: true
     )
+  end
+
+  desc "updates xcconfig file in given `path` by adding the rest of passed parameters"
+  lane :update_xcconfig do |options|
+    path = '../' + options[:path]
+    config = Xcodeproj::Config.new(path)
+    config.merge!(options.except(:path)) # `except()` requires Ruby 3
+    config.save_as(Pathname.new(path))
   end
 end
