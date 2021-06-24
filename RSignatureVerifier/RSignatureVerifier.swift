@@ -1,5 +1,5 @@
 /// Signature Verifier public API functions
-@objc public final class SignatureVerifier: NSObject {
+@objc public final class RSignatureVerifier: NSObject {
 
     /// Verifies signature of given data using public key with given id
     /// - Parameter signature: Signature to be verified encoded in base64

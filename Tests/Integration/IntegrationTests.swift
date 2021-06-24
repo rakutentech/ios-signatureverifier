@@ -35,9 +35,9 @@ class IntegrationSpec: QuickSpec {
                             return
                         }
 
-                        SignatureVerifier.verify(signature: bundleSignature,
-                                                 keyId: keyId,
-                                                 data: (bundleVersion + self.sha256(data: data)).data(using: .ascii)!) { verified in
+                        RSignatureVerifier.verify(signature: bundleSignature,
+                                                  keyId: keyId,
+                                                  data: (bundleVersion + self.sha256(data: data)).data(using: .ascii)!) { verified in
                             expect(verified).to(beTrue())
                             done()
                         }
