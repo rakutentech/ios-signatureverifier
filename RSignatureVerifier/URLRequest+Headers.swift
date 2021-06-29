@@ -1,11 +1,10 @@
 extension URLRequest {
-    mutating func setHeaders(from environment: Environment) {
-        addHeader("apiKey", "ras-\(environment.subscriptionKey)")
-    }
-
-    mutating func addHeader(_ name: String, _ value: String) {
-        if !value.isEmpty {
-            addValue(value, forHTTPHeaderField: name)
+    mutating func setSubscriptionKey(_ key: String) {
+        var keyValue = key
+        if !key.hasPrefix("ras-") {
+            keyValue = "ras-\(key)"
         }
+
+        addValue(keyValue, forHTTPHeaderField: "apiKey")
     }
 }

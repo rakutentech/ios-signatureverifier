@@ -7,15 +7,13 @@ class RealSignatureVerifierSpec: QuickSpec {
 
         describe("RealSignatureVerifier") {
 
-            let bundleMock = BundleMock()
-            let keyStore = KeyStore(service: "unit-tests")
+            let config = Fetcher.Config(baseURL: URL(string: "https://www.endpoint.com")!, subscriptionKey: "my-subkey")
+            let keyStore = KeyStore(account: config.baseURL.identifier, service: "unit-tests")
             let mockData = "data".data(using: .utf8)!
 
             var fetcher: FetcherMock!
             var verifier: VerifierMock!
             var svModule: RealSignatureVerifier!
-
-            bundleMock.mockEndpoint = "https://www.endpoint.com"
 
             beforeEach {
                 keyStore.empty()

@@ -1,13 +1,11 @@
-/// Signature Verifier Config public API functions
 internal final class RealSignatureVerifier {
-    static let shared = RealSignatureVerifier()
 
     let keyStore: KeyStore
     private var fetcher: Fetchable
     private let verifier: Verifiable
 
-    init(fetcher: Fetchable = Fetcher(client: APIClient(), environment: Environment()),
-         keyStore: KeyStore = KeyStore(),
+    init(fetcher: Fetchable,
+         keyStore: KeyStore,
          verifier: Verifiable = Verifier()) {
 
         self.fetcher = fetcher

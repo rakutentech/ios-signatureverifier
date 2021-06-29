@@ -73,7 +73,9 @@ workflows:
             TESTS_BUNDLE_VERSION:"$TESTS_BUNDLE_VERSION" \
             TESTS_BUNDLE_URL:"$TESTS_BUNDLE_URL" \
             TESTS_BUNDLE_SIGNATURE:"$TESTS_BUNDLE_SIGNATURE" \
-            TESTS_KEY_ID:"$TESTS_KEY_ID"
+            TESTS_KEY_ID:"$TESTS_KEY_ID" \
+            RAS_SUBSCRIPTION_KEY:"$RAS_SUBSCRIPTION_KEY" \
+            RSV_KEY_FETCH_ENDPOINT:"$RSV_KEY_FETCH_ENDPOINT"
     - xcode-test@2:
         inputs:
         - simulator_device: iPhone 8

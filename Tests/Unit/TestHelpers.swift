@@ -1,26 +1,5 @@
 @testable import RSignatureVerifier
 
-class BundleMock: EnvironmentSettable {
-
-    var mockSubKey: String?
-    var mockEndpoint: String?
-
-    func value(for key: String) -> String? {
-        switch key {
-        case "RSVKeyFetchEndpoint":
-            return mockEndpoint
-        case "RASProjectSubscriptionKey":
-            return mockSubKey
-        default:
-            return nil
-        }
-    }
-
-    var valueNotFound: String {
-        Bundle.main.valueNotFound
-    }
-}
-
 class FetcherMock: Fetchable {
     var fetchConfigCalledNumTimes = 0
     var fetchKeyCalledNumTimes = 0

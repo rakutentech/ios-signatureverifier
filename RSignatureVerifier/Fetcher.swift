@@ -3,20 +3,19 @@ protocol Fetchable {
 }
 
 internal struct Fetcher: Fetchable {
-    let apiClient: APIClientType
-    let environment: Environment
 
-    init(client: APIClientType, environment: Environment) {
-        self.apiClient = client
-        self.environment = environment
+    struct Config {
+        let baseURL: URL
+        let subscriptionKey: String
     }
+
+    let apiClient: APIClientType
+    let config: Config
 
     // MARK: Fetch Key
     func fetchKey(with keyId: String, completionHandler: @escaping (KeyModel?) -> Void) {
-        guard let url = environment.keyUrl(with: keyId) else {
-            return completionHandler(nil)
-        }
-        let keyRequest = request(for: url)
+        let url = config.baseURL.appendingPathComponent(keyId)
+        let keyRequest = request(for: url, config: config)
 
         apiClient.send(request: keyRequest, responseType: KeyModel.self) { (result) in
             switch result {
@@ -29,9 +28,9 @@ internal struct Fetcher: Fetchable {
         }
     }
 
-    private func request(for url: URL) -> URLRequest {
+    private func request(for url: URL, config: Config) -> URLRequest {
         var request = URLRequest(url: url)
-        request.setHeaders(from: environment)
+        request.setSubscriptionKey(config.subscriptionKey)
         return request
     }
 }

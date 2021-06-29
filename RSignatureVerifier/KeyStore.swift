@@ -1,12 +1,12 @@
 internal final class KeyStore {
-    let service: String
-    let account: String
+    private let service: String
+    private let account: String
 
     typealias KeysDictionary = [String: String]
 
-    init(service: String = Bundle.main.bundleIdentifier!) {
+    init(account: String, service: String = Bundle.main.bundleIdentifier!) {
         self.service = service
-        self.account = "\(service).keys"
+        self.account = "\(service).\(account).keys"
     }
 
     func key(for keyId: String) -> String? {
@@ -15,9 +15,6 @@ internal final class KeyStore {
 
     func addKey(key: String, for keyId: String) {
         var keysDict = getKeys() ?? [:]
-        guard keysDict[keyId] == nil else {
-            return // key exists
-        }
 
         keysDict[keyId] = key
         write(keys: keysDict)

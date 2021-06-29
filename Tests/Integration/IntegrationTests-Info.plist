@@ -20,6 +20,10 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>RAS_SUBSCRIPTION_KEY</key>
+	<string>$(RAS_SUBSCRIPTION_KEY)</string>
+	<key>RSV_KEY_FETCH_ENDPOINT</key>
+	<string>$(RSV_KEY_FETCH_ENDPOINT)</string>
 	<key>TESTS_BUNDLE_SIGNATURE</key>
 	<string>$(TESTS_BUNDLE_SIGNATURE)</string>
 	<key>TESTS_BUNDLE_URL</key>

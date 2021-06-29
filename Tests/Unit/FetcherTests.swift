@@ -5,20 +5,13 @@ import Nimble
 class FetcherSpec: QuickSpec {
     override func spec() {
         describe("key fetch function") {
-            let bundleMock = BundleMock()
-            let userDefaults = UserDefaults(suiteName: "FetcherSpec")!
             var apiClientMock: APIClientMock!
-
-            bundleMock.mockEndpoint = "https://www.endpoint.com"
-
-            func getEnvironment() -> Environment {
-                let env = Environment(bundle: bundleMock)
-                env.userDefaults = userDefaults
-                return env
-            }
+            var fetcher: Fetcher!
+            let config = Fetcher.Config(baseURL: URL(string: "https://www.endpoint.com")!, subscriptionKey: "my-subkey")
 
             beforeEach {
                 apiClientMock = APIClientMock()
+                fetcher = Fetcher(apiClient: apiClientMock, config: config)
             }
 
             afterEach {
@@ -26,8 +19,6 @@ class FetcherSpec: QuickSpec {
             }
 
             it("will call the send function of the api client passing in a request") {
-                let fetcher = Fetcher(client: apiClientMock, environment: getEnvironment())
-
                 fetcher.fetchKey(with: "key", completionHandler: { (_) in
                 })
 
@@ -36,8 +27,6 @@ class FetcherSpec: QuickSpec {
 
             it("will pass nil in the completion handler when environment is incorrectly configured") {
                 var testResult: Any?
-                bundleMock.mockEndpoint = "12345"
-                let fetcher = Fetcher(client: APIClientMock(), environment: getEnvironment())
 
                 fetcher.fetchKey(with: "key", completionHandler: { (result) in
                     testResult = result
@@ -47,8 +36,14 @@ class FetcherSpec: QuickSpec {
             }
 
             it("will prefix ras- to the request's subscription key header") {
-                bundleMock.mockSubKey = "my-subkey"
-                let fetcher = Fetcher(client: apiClientMock, environment: getEnvironment())
+                fetcher.fetchKey(with: "key", completionHandler: { (_) in
+                })
+                expect(apiClientMock.request?.allHTTPHeaderFields!["apiKey"]).toEventually(equal("ras-my-subkey"))
+            }
+
+            it("will not add (another) ras- prefix to the subscription key, if it already exists") {
+                fetcher = Fetcher(apiClient: apiClientMock,
+                                  config: .init(baseURL: URL(string: "https://www.endpoint.com")!, subscriptionKey: "ras-my-subkey"))
 
                 fetcher.fetchKey(with: "key", completionHandler: { (_) in
                 })
@@ -56,13 +51,15 @@ class FetcherSpec: QuickSpec {
             }
 
             context("when valid key model is received as the result from the api client") {
-                it("will set the config dictionary in the result passed to the completion handler") {
-                    var testResult: Any?
-                        let dataString = """
+                beforeEach {
+                    let dataString = """
                         {"id":"foo","ecKey":"myKeyId","pemKey":"myPemKey"}
                         """
                     apiClientMock.data = dataString.data(using: .utf8)
-                    let fetcher = Fetcher(client: apiClientMock, environment: getEnvironment())
+                }
+
+                it("will set the config dictionary in the result passed to the completion handler") {
+                    var testResult: Any?
 
                     fetcher.fetchKey(with: "key", completionHandler: { (result) in
                         testResult = result
@@ -73,10 +70,12 @@ class FetcherSpec: QuickSpec {
             }
 
             context("when error is received as the result from the api client") {
+                beforeEach {
+                    apiClientMock.error = NSError(domain: "Test", code: 123, userInfo: nil)
+                }
+
                 it("will pass nil in the completion handler") {
                     var testResult: Any?
-                    apiClientMock.error = NSError(domain: "Test", code: 123, userInfo: nil)
-                    let fetcher = Fetcher(client: apiClientMock, environment: getEnvironment())
 
                     fetcher.fetchKey(with: "key", completionHandler: { (result) in
                         testResult = result
