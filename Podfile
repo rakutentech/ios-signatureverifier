@@ -15,7 +15,3 @@ target 'SampleApp' do
   end
 end
 
-post_install do |installer|
-  # secure xcconfig variables config
-  system("./scripts/configure-secrets.sh SignatureVerifier #{secrets.join(" ")}")
-end

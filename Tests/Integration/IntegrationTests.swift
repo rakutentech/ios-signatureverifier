@@ -14,8 +14,20 @@ class IntegrationSpec: QuickSpec {
             let bundleSignature = bundle.object(forInfoDictionaryKey: "TESTS_BUNDLE_SIGNATURE") as? String
             let keyId = bundle.object(forInfoDictionaryKey: "TESTS_KEY_ID") as? String
 
+            let endpointSubscriptionKey = bundle.object(forInfoDictionaryKey: "RAS_SUBSCRIPTION_KEY") as? String
+            let endpointURLString = bundle.object(forInfoDictionaryKey: "RSV_KEY_FETCH_ENDPOINT") as? String
+
+            var instance: RSignatureVerifier!
+
             beforeEach {
-                RealSignatureVerifier.shared.keyStore.empty()
+                guard let endpointURLString = endpointURLString,
+                      let endpointSubscriptionKey = endpointSubscriptionKey,
+                      let endpointURL = URL(string: endpointURLString) else {
+                    fail("Missing environment variables")
+                    return
+                }
+                instance = RSignatureVerifier(baseURL: endpointURL, subscriptionKey: endpointSubscriptionKey)
+                instance.realInstance.keyStore.empty()
             }
 
             it("will download and verify bundle's signature") {
@@ -35,9 +47,9 @@ class IntegrationSpec: QuickSpec {
                             return
                         }
 
-                        RSignatureVerifier.verify(signature: bundleSignature,
-                                                  keyId: keyId,
-                                                  data: (bundleVersion + self.sha256(data: data)).data(using: .ascii)!) { verified in
+                        instance.verify(signature: bundleSignature,
+                                        keyId: keyId,
+                                        data: (bundleVersion + self.sha256(data: data)).data(using: .ascii)!) { verified in
                             expect(verified).to(beTrue())
                             done()
                         }

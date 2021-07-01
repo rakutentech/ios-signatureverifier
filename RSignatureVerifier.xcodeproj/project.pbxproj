@@ -53,8 +53,6 @@
 		4538B9CE2624F7FE009952BE /* APIClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIClientTests.swift; sourceTree = "<group>"; };
 		4538B9D22624F7FE009952BE /* TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		4538B9D42624F7FF009952BE /* FetcherTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetcherTests.swift; sourceTree = "<group>"; };
-		4538BA532625A1CE009952BE /* Sample-Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "Sample-Debug.xcconfig"; path = "Sample/Sample-Debug.xcconfig"; sourceTree = SOURCE_ROOT; };
-		4538BA542625A1CE009952BE /* Sample-Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Sample-Release.xcconfig"; sourceTree = "<group>"; };
 		45603B3926812118008AD21B /* Sample-IntegrationTests.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Sample-IntegrationTests.xcconfig"; sourceTree = "<group>"; };
 		45B63B38264C786300ED8BA0 /* KeyStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyStoreTests.swift; sourceTree = "<group>"; };
 		45CBD77226526652006F4918 /* RealSignatureVerifierTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealSignatureVerifierTests.swift; sourceTree = "<group>"; };
@@ -117,8 +115,6 @@
 				74F30D3437EDCBB47762E3F8 /* Main.storyboard */,
 				77B35D3519D4BAF808F76B7A /* AppDelegate.swift */,
 				F2C1496DE0F1D2008127E8FA /* Info.plist */,
-				4538BA532625A1CE009952BE /* Sample-Debug.xcconfig */,
-				4538BA542625A1CE009952BE /* Sample-Release.xcconfig */,
 				45603B3926812118008AD21B /* Sample-IntegrationTests.xcconfig */,
 			);
 			path = Sample;
@@ -459,7 +455,6 @@
 		};
 		7880647758638F2DF6F98AC6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4538BA532625A1CE009952BE /* Sample-Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -584,7 +579,6 @@
 		};
 		D90093CFDAEBFC83890E0D50 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4538BA542625A1CE009952BE /* Sample-Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
