@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/rakutentech/ios-signatureverifier"
   s.license      = { :type => 'MIT', :file => 'LICENSE' }
   s.source       = { :git => "https://github.com/rakutentech/ios-signatureverifier.git", :tag => s.version.to_s }
-  s.platform     = :ios, '11.0'
+  s.platform     = :ios, '13.0'
   s.swift_version = '5.3'
   s.documentation_url = "https://rakutentech.github.io/ios-signatureverifier/"
   s.weak_frameworks = [
