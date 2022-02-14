@@ -1,6 +1,8 @@
 ![Build Status](https://app.bitrise.io/app/645745d7672035ad/status.svg?token=VB-AbZcna-9V20YrJXafbg)
 [![codecov](https://codecov.io/gh/rakutentech/ios-signatureverifier/branch/main/graph/badge.svg)](https://codecov.io/gh/rakutentech/ios-signatureverfier)
 
+## 💀 ⚠️ This module is now EOL and is no longer maintained
+
 # RSignatureVerifier
 
 Signature Verifier module provides a security feature to verify any signed blob of data's authenticity after it has been downloaded.
